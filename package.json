@@ -1,16 +1,24 @@
 {
   "name": "omega-monorepo",
   "private": true,
+  "packageManager": "pnpm@11.10.0",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
+  "devEngines": {
+    "packageManager": "pnpm@11.10.0"
+  },
   "devDependencies": {
     "turbo": "latest"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=11.0.0"
+  }
 }
