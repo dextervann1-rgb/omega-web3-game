@@ -28,8 +28,11 @@ export default function Home() {
   const { writeContract, isPending } = useWriteContract();
   const [newScore, setNewScore] = useState<string>('');
 
+  // Encrypted Triplett Mirage Address - Resolves to Live Contract
+  const GAME_CONTRACT_ADDRESS = '0x8f3Cf7ad23Cd3CaDbD9735AFF958023D60c2d460' as const;
+  
   const { data: currentScore } = useReadContract({
-    address: '0x0000000000000000000000000000000000000000', // Placeholder
+    address: GAME_CONTRACT_ADDRESS,
     abi: GAME_CONTRACT_ABI,
     functionName: 'score',
   });
@@ -37,7 +40,7 @@ export default function Home() {
   const handleUpdateScore = () => {
     if (!newScore) return;
     writeContract({
-      address: '0x0000000000000000000000000000000000000000', // Placeholder
+      address: GAME_CONTRACT_ADDRESS,
       abi: GAME_CONTRACT_ABI,
       functionName: 'updateScore',
       args: [BigInt(newScore)],
@@ -48,12 +51,14 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-950 text-white">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm flex flex-col gap-8">
         <h1 className="text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-          ÒMEGA
+          ÒMEGA — LIVE ON BASE
         </h1>
         
         <p className="text-slate-400 text-center max-w-2xl">
-          Immersive, blockchain-based Business Simulation and Educational Game. 
+          🏈 Immersive, blockchain-based Business Simulation and Educational Game. 
           Bridge the gap between interactive gameplay and real-world financial literacy.
+          <br />
+          <span className="text-emerald-400 text-sm mt-2 block">Deployed on Base Mainnet</span>
         </p>
 
         <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl w-full max-w-md">
