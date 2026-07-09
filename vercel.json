@@ -3,5 +3,7 @@
   "buildCommand": "turbo run build --filter=frontend",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "outputDirectory": "packages/frontend/.next"
+  "outputDirectory": "packages/frontend/.next",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
