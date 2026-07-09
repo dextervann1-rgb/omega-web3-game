@@ -3,18 +3,25 @@
 import { useState } from 'react';
 import { useAccount, useConnect, useDisconnect, useWriteContract, useReadContract } from 'wagmi';
 
-// Basic ABI for GameContract
+// Updated ABI for GameContract with Play Fee
 const GAME_CONTRACT_ABI = [
   {
     type: 'function',
     name: 'updateScore',
     inputs: [{ name: '_score', type: 'uint256' }],
     outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'payable',
   },
   {
     type: 'function',
     name: 'score',
+    inputs: [],
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    name: 'playFee',
     inputs: [],
     outputs: [{ name: '', type: 'uint256' }],
     stateMutability: 'view',
@@ -37,13 +44,20 @@ export default function Home() {
     functionName: 'score',
   });
 
+  const { data: playFee } = useReadContract({
+    address: GAME_CONTRACT_ADDRESS,
+    abi: GAME_CONTRACT_ABI,
+    functionName: 'playFee',
+  });
+
   const handleUpdateScore = () => {
-    if (!newScore) return;
+    if (!newScore || !playFee) return;
     writeContract({
       address: GAME_CONTRACT_ADDRESS,
       abi: GAME_CONTRACT_ABI,
       functionName: 'updateScore',
       args: [BigInt(newScore)],
+      value: playFee, // Attach the fee to the transaction
     });
   };
 
@@ -100,8 +114,11 @@ export default function Home() {
                   disabled={isPending}
                   className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 rounded-lg transition-colors font-medium"
                 >
-                  {isPending ? 'Updating...' : 'Update Score on Chain'}
+                  {isPending ? 'Updating...' : `Update Score (${playFee ? (Number(playFee) / 1e18).toFixed(4) : '0.0001'} ETH Fee)`}
                 </button>
+                <p className="text-[10px] text-slate-500 text-center mt-1">
+                  Small fee required to secure score on Base Mainnet.
+                </p>
               </div>
 
               <button
