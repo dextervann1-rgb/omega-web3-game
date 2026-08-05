@@ -11,7 +11,7 @@ function createWindow() {
   })
   
   // Using the Vercel URL as requested
-  win.loadURL('https://omega-web3-game.vercel.app') 
+  win.loadURL('https://hendrixlamar.space') 
 }
 
 app.whenReady().then(createWindow)
