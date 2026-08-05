@@ -5,6 +5,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "desktop": "pnpm --filter desktop run electron",
+    "desktop:dist": "pnpm --filter desktop run dist",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

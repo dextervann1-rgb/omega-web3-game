@@ -1,0 +1,13 @@
+{
+  "name": "desktop",
+  "version": "0.1.0",
+  "main": "electron.js",
+  "scripts": {
+    "electron": "electron .",
+    "dist": "electron-builder --win --mac"
+  },
+  "devDependencies": {
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3"
+  }
+}
