@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
@@ -35,7 +36,10 @@ export default function RootLayout({
             <div className="flex-1 flex flex-col">
               {children}
               <footer className="py-6 text-center text-sm opacity-60">
-                Est. by Abba — Stewarded by Vann Family
+                <p>Est. by Abba — Stewarded by Vann Family</p>
+                <Link href="/privacy" className="mt-2 inline-block underline decoration-[#B68B3E]/70 underline-offset-4 transition hover:opacity-100">
+                  Privacy Policy
+                </Link>
               </footer>
             </div>
           </VFVSealBackground>

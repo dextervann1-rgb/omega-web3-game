@@ -10,7 +10,7 @@ const VFVSealBackground = ({ children, opacity = 0.08 }) => {
           inset: 0,
           background: "url('/assets/vfv_abba_seal_final.png') center/50% no-repeat",
           opacity: opacity,
-          pointer-events: 'none',
+          pointerEvents: 'none',
           zIndex: 0,
         }}
       />
